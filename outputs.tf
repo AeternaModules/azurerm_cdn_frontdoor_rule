@@ -1,3 +1,7 @@
+output "cdn_frontdoor_rules_id" {
+  description = "Map of id values across all cdn_frontdoor_rules, keyed the same as var.cdn_frontdoor_rules"
+  value       = { for k, v in azurerm_cdn_frontdoor_rule.cdn_frontdoor_rules : k => v.id }
+}
 output "cdn_frontdoor_rules_actions" {
   description = "Map of actions values across all cdn_frontdoor_rules, keyed the same as var.cdn_frontdoor_rules"
   value       = { for k, v in azurerm_cdn_frontdoor_rule.cdn_frontdoor_rules : k => v.actions }
