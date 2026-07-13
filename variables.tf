@@ -131,7 +131,7 @@ EOT
     cdn_frontdoor_rule_set_id = string
     name                      = string
     order                     = number
-    behavior_on_match         = optional(string) # Default: "Continue"
+    behavior_on_match         = optional(string)
     actions = object({
       request_header_action = optional(list(object({
         header_action = string
@@ -153,125 +153,125 @@ EOT
         query_string_parameters       = optional(list(string))
       }))
       url_redirect_action = optional(object({
-        destination_fragment = optional(string) # Default: ""
+        destination_fragment = optional(string)
         destination_hostname = string
-        destination_path     = optional(string) # Default: ""
-        query_string         = optional(string) # Default: ""
-        redirect_protocol    = optional(string) # Default: "MatchRequest"
+        destination_path     = optional(string)
+        query_string         = optional(string)
+        redirect_protocol    = optional(string)
         redirect_type        = string
       }))
       url_rewrite_action = optional(object({
         destination             = string
-        preserve_unmatched_path = optional(bool) # Default: false
+        preserve_unmatched_path = optional(bool)
         source_pattern          = string
       }))
     })
     conditions = optional(object({
       client_port_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
       })))
       cookies_condition = optional(list(object({
         cookie_name      = string
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       host_name_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       http_version_condition = optional(list(object({
         match_values     = set(string)
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "Equal"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       is_device_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "Equal"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       post_args_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         post_args_name   = string
         transforms       = optional(set(string))
       })))
       query_string_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       remote_address_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "IPMatch"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       request_body_condition = optional(list(object({
         match_values     = list(string)
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       request_header_condition = optional(list(object({
         header_name      = string
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       request_method_condition = optional(list(object({
         match_values     = set(string)
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "Equal"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       request_scheme_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "Equal"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       request_uri_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       server_port_condition = optional(list(object({
         match_values     = set(string)
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
       })))
       socket_address_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "IPMatch"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       ssl_protocol_condition = optional(list(object({
         match_values     = set(string)
-        negate_condition = optional(bool)   # Default: false
-        operator         = optional(string) # Default: "Equal"
+        negate_condition = optional(bool)
+        operator         = optional(string)
       })))
       url_file_extension_condition = optional(list(object({
         match_values     = list(string)
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       url_filename_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
       url_path_condition = optional(list(object({
         match_values     = optional(list(string))
-        negate_condition = optional(bool) # Default: false
+        negate_condition = optional(bool)
         operator         = string
         transforms       = optional(set(string))
       })))
@@ -340,14 +340,94 @@ EOT
   #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
   # path: actions.route_configuration_override_action.cache_duration
   #   source:    validate.CdnFrontDoorCacheDuration: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
+  # path: conditions.remote_address_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_method_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_method_condition.match_values[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.query_string_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.query_string_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
   # path: conditions.post_args_condition.post_args_name
   #   condition: length(value) > 0
   #   message:   must not be empty
+  # path: conditions.post_args_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.post_args_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_uri_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_uri_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
   # path: conditions.request_header_condition.header_name
   #   condition: length(value) > 0
   #   message:   must not be empty
+  # path: conditions.request_header_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_header_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_body_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_body_condition.match_values[*]
+  #   condition: length(value) > 0
+  #   message:   must not be empty
+  # path: conditions.request_body_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_scheme_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.request_scheme_condition.match_values[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.url_path_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.url_path_condition.match_values[*]
+  #   source:    validate.CdnFrontDoorUrlPathConditionMatchValue: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
+  # path: conditions.url_path_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.url_file_extension_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.url_file_extension_condition.match_values[*]
+  #   condition: length(value) > 0
+  #   message:   must not be empty
+  # path: conditions.url_file_extension_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.url_filename_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.url_filename_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.http_version_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.http_version_condition.match_values[*]
+  #   condition: contains(["2.0", "1.1", "1.0", "0.9"], value)
+  #   message:   must be one of: 2.0, 1.1, 1.0, 0.9
   # path: conditions.cookies_condition.cookie_name
   #   condition: length(value) > 0
   #   message:   must not be empty
+  # path: conditions.cookies_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.cookies_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.is_device_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.is_device_condition.match_values[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.socket_address_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.client_port_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.server_port_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.server_port_condition.match_values[*]
+  #   condition: contains(["80", "443"], value)
+  #   message:   must be one of: 80, 443
+  # path: conditions.host_name_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.host_name_condition.transforms[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.ssl_protocol_condition.operator
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  # path: conditions.ssl_protocol_condition.match_values[*]
+  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
 }
 
