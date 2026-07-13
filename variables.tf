@@ -277,157 +277,134 @@ EOT
       })))
     }))
   }))
-  # --- Unconfirmed validation candidates, derived from azurerm_cdn_frontdoor_rule's provider source ---
-  # Not auto-enabled: either a bespoke provider validator we can't safely translate,
-  # or a path that crosses a list-typed block (needs its own for_each wrapping).
-  # Review, translate into a real validation{} block above, and delete once confirmed.
-  # path: name
-  #   source:    validate.CdnFrontDoorRuleName: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
-  # path: cdn_frontdoor_rule_set_id
-  #   source:    [from validate.FrontDoorRuleSetID] !ok
-  # path: cdn_frontdoor_rule_set_id
-  #   source:    [from validate.FrontDoorRuleSetID] err != nil
-  # path: behavior_on_match
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: order
-  #   condition: value >= 0
-  #   message:   must be at least 0
-  # path: actions.url_redirect_action.redirect_type
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.url_redirect_action.redirect_protocol
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.url_redirect_action.destination_path
-  #   source:    validate.CdnFrontDoorUrlRedirectActionDestinationPath: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
-  # path: actions.url_redirect_action.destination_hostname
-  #   condition: length(value) >= 0 && length(value) <= 2048
-  #   message:   must be between 0 and 2048 characters
-  # path: actions.url_redirect_action.query_string
-  #   source:    validate.CdnFrontDoorUrlRedirectActionQueryString: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
-  # path: actions.url_redirect_action.destination_fragment
-  #   condition: length(value) >= 0 && length(value) <= 1024
-  #   message:   must be between 0 and 1024 characters
-  # path: actions.url_rewrite_action.source_pattern
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: actions.url_rewrite_action.destination
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: actions.request_header_action.header_action
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.request_header_action.header_name
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: actions.request_header_action.value
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: actions.response_header_action.header_action
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.response_header_action.header_name
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: actions.response_header_action.value
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: actions.route_configuration_override_action.cdn_frontdoor_origin_group_id
-  #   source:    [from validate.FrontDoorOriginGroupID] !ok
-  # path: actions.route_configuration_override_action.cdn_frontdoor_origin_group_id
-  #   source:    [from validate.FrontDoorOriginGroupID] err != nil
-  # path: actions.route_configuration_override_action.forwarding_protocol
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.route_configuration_override_action.query_string_caching_behavior
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.route_configuration_override_action.cache_behavior
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: actions.route_configuration_override_action.cache_duration
-  #   source:    validate.CdnFrontDoorCacheDuration: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
-  # path: conditions.remote_address_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_method_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_method_condition.match_values[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.query_string_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.query_string_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.post_args_condition.post_args_name
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: conditions.post_args_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.post_args_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_uri_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_uri_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_header_condition.header_name
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: conditions.request_header_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_header_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_body_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_body_condition.match_values[*]
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: conditions.request_body_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_scheme_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.request_scheme_condition.match_values[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.url_path_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.url_path_condition.match_values[*]
-  #   source:    validate.CdnFrontDoorUrlPathConditionMatchValue: no recognizable `if ... { errors = append(...) }` pattern - read it by hand
-  # path: conditions.url_path_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.url_file_extension_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.url_file_extension_condition.match_values[*]
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: conditions.url_file_extension_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.url_filename_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.url_filename_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.http_version_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.http_version_condition.match_values[*]
-  #   condition: contains(["2.0", "1.1", "1.0", "0.9"], value)
-  #   message:   must be one of: 2.0, 1.1, 1.0, 0.9
-  # path: conditions.cookies_condition.cookie_name
-  #   condition: length(value) > 0
-  #   message:   must not be empty
-  # path: conditions.cookies_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.cookies_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.is_device_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.is_device_condition.match_values[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.socket_address_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.client_port_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.server_port_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.server_port_condition.match_values[*]
-  #   condition: contains(["80", "443"], value)
-  #   message:   must be one of: 80, 443
-  # path: conditions.host_name_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.host_name_condition.transforms[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.ssl_protocol_condition.operator
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
-  # path: conditions.ssl_protocol_condition.match_values[*]
-  #   source:    validation.StringInSlice value list is not a literal []string - likely a generated PossibleValuesFor*() helper; resolve separately
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.order >= 0
+      )
+    ])
+    error_message = "must be at least 0"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.url_redirect_action == null || (length(v.actions.url_redirect_action.destination_hostname) >= 0 && length(v.actions.url_redirect_action.destination_hostname) <= 2048)
+      )
+    ])
+    error_message = "must be between 0 and 2048 characters"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.url_redirect_action == null || (v.actions.url_redirect_action.destination_fragment == null || (length(v.actions.url_redirect_action.destination_fragment) >= 0 && length(v.actions.url_redirect_action.destination_fragment) <= 1024))
+      )
+    ])
+    error_message = "must be between 0 and 1024 characters"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.url_rewrite_action == null || (length(v.actions.url_rewrite_action.source_pattern) > 0)
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.url_rewrite_action == null || (length(v.actions.url_rewrite_action.destination) > 0)
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.request_header_action == null || alltrue([for item in v.actions.request_header_action : (length(item.header_name) > 0)])
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.request_header_action == null || alltrue([for item in v.actions.request_header_action : (item.value == null || (length(item.value) > 0))])
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.response_header_action == null || alltrue([for item in v.actions.response_header_action : (length(item.header_name) > 0)])
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.actions.response_header_action == null || alltrue([for item in v.actions.response_header_action : (item.value == null || (length(item.value) > 0))])
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.post_args_condition == null || alltrue([for item in v.conditions.post_args_condition : (length(item.post_args_name) > 0)]))
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.request_header_condition == null || alltrue([for item in v.conditions.request_header_condition : (length(item.header_name) > 0)]))
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.request_body_condition == null || alltrue([for item in v.conditions.request_body_condition : (alltrue([for x in item.match_values : length(x) > 0]))]))
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.url_file_extension_condition == null || alltrue([for item in v.conditions.url_file_extension_condition : (alltrue([for x in item.match_values : length(x) > 0]))]))
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.http_version_condition == null || alltrue([for item in v.conditions.http_version_condition : (alltrue([for x in item.match_values : contains(["2.0", "1.1", "1.0", "0.9"], x)]))]))
+      )
+    ])
+    error_message = "must be one of: 2.0, 1.1, 1.0, 0.9"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.cookies_condition == null || alltrue([for item in v.conditions.cookies_condition : (length(item.cookie_name) > 0)]))
+      )
+    ])
+    error_message = "must not be empty"
+  }
+  validation {
+    condition = alltrue([
+      for k, v in var.cdn_frontdoor_rules : (
+        v.conditions == null || (v.conditions.server_port_condition == null || alltrue([for item in v.conditions.server_port_condition : (alltrue([for x in item.match_values : contains(["80", "443"], x)]))]))
+      )
+    ])
+    error_message = "must be one of: 80, 443"
+  }
+  # Note: 50 additional provider-side validators are enforced at apply time but not mirrored as validation{} blocks here (bespoke or non-mechanically-translatable).
 }
 
